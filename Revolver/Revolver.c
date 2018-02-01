@@ -34,19 +34,71 @@ void setDriveMotorsState()
 		}
 }
 
-void setConveyorBeltMotorState()
+void setConveyorBeltMotorState(bool* pIsRevolverInAutoMode)
 {
 		if (vexRT[BtnRUp] == true)
 		{
 				motor[conveyor] = 100;
+				*pIsRevolverInAutoMode = true;
 		}
 		if (vexRT[BtnRDown] == true)
 		{
 				motor[conveyor] = 0;
+				*pIsRevolverInAutoMode = false;
 		}
 }
 
-void processColorSensor()
+void setRevolverMotorStateInManualMode(bool* pIsRevolverInAutoMode)
+{
+		int increment = 0;
+		if (vexRT[BtnFUp] == true)
+		{
+				increment = 1;
+		}
+		if (vexRT[BtnFDown] == true)
+		{
+				increment = -1;
+		}
+
+		if (increment != 0)
+		{
+				*pIsRevolverInAutoMode = false;
+
+				int stepCount = ((int)(getMotorEncoder(revolver) + 20)) / 60;
+				stepCount += increment;
+
+				setMotorTarget(revolver,  stepCount * 60, 100);
+		}
+		else
+		{
+				static int previousFineAdjustmentSpeed = 0;
+				int fineAdjustmentSpeed = 0;
+				if (vexRT[BtnEUp] == true)
+				{
+						fineAdjustmentSpeed = 15;
+				}
+				else if (vexRT[BtnEDown] == true)
+				{
+						fineAdjustmentSpeed = -15;
+				}
+
+				if (fineAdjustmentSpeed != 0)
+				{
+						*pIsRevolverInAutoMode = false;
+						motor[revolver] = fineAdjustmentSpeed;
+				}
+				else if (previousFineAdjustmentSpeed != 0)
+				{
+						motor[revolver] = 0;
+						resetMotorEncoder(revolver);
+				}
+
+				previousFineAdjustmentSpeed = fineAdjustmentSpeed;
+		}
+}
+
+
+void setRevolverMotorStateInAutoMode()
 {
 		int blueChannel = getColorBlueChannel(port2);
 		int redChannel = getColorRedChannel(port2);
@@ -54,14 +106,19 @@ void processColorSensor()
 
 		writeDebugStreamLine("%3d    %3d     %3d", redChannel, greenChannel, blueChannel);
 
-		if (blueChannel > redChannel && blueChannel > greenChannel && blueChannel > 5) {
+		if (blueChannel > redChannel && blueChannel > greenChannel && blueChannel > 5)
+		{
 				// blue
 				setMotorTarget(motor5, 120, 100);
 
-		} else if (redChannel > blueChannel && redChannel > greenChannel && redChannel > 5) {
+		}
+		else if (redChannel > blueChannel && redChannel > greenChannel && redChannel > 5)
+		{
 				// red
 				setMotorTarget(motor5, -120, 100);
-		} else if (greenChannel > 5) {
+		}
+		else if (greenChannel > 5)
+		{
 				// green
 				setMotorTarget(motor5, 0, 100);
 		}
@@ -86,14 +143,17 @@ void setDumperMotorState()
 task main()
 {
 		setColorMode(port2, colorTypeRGB_Hue_Reflected);
+		bool isRevolverInAutoMode = false;
 
 		while (true)
 		{
 			setDriveMotorsState();
-			setConveyorBeltMotorState();
-			processColorSensor();
+			setConveyorBeltMotorState(&isRevolverInAutoMode);
+			setRevolverMotorStateInManualMode(&isRevolverInAutoMode);
+			if (isRevolverInAutoMode == true)
+			{
+					setRevolverMotorStateInAutoMode();
+			}
 			setDumperMotorState();
-
-				//writeDebugStreamLine("%d", vexRT[ChC]);
 		}
 }
