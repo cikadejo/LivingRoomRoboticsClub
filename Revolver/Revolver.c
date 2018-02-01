@@ -1,3 +1,4 @@
+#pragma config(Sensor, port2,  colorSensor,    sensorVexIQ_ColorHue)
 #pragma config(Motor,  motor1,          leftDrive,     tmotorVexIQ, PIDControl, encoder)
 #pragma config(Motor,  motor5,          revolver,      tmotorVexIQ, PIDControl, encoder)
 #pragma config(Motor,  motor6,          rightDrive,    tmotorVexIQ, PIDControl, reversed, encoder)
@@ -45,12 +46,36 @@ void setConveyorBeltMotorState()
 		}
 }
 
+void processColorSensor()
+{
+		int blueChannel = getColorBlueChannel(port2);
+		int redChannel = getColorRedChannel(port2);
+		int greenChannel = getColorGreenChannel(port2);
+
+		writeDebugStreamLine("%3d    %3d     %3d", redChannel, greenChannel, blueChannel);
+
+		if (blueChannel > redChannel && blueChannel > greenChannel && blueChannel > 5) {
+				// blue
+				setMotorTarget(motor5, 120, 100);
+
+		} else if (redChannel > blueChannel && redChannel > greenChannel && redChannel > 5) {
+				// red
+				setMotorTarget(motor5, -120, 100);
+		} else if (greenChannel > 5) {
+				// green
+				setMotorTarget(motor5, 0, 100);
+		}
+}
+
 task main()
 {
+		setColorMode(port2, colorTypeRGB_Hue_Reflected);
+
 		while (true)
 		{
 			setDriveMotorsState();
 			setConveyorBeltMotorState();
+			processColorSensor();
 
 				//writeDebugStreamLine("%d", vexRT[ChC]);
 		}
