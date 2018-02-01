@@ -67,6 +67,22 @@ void processColorSensor()
 		}
 }
 
+void setDumperMotorState()
+{
+		if (vexRT[BtnLUp] == true)
+		{
+				motor[dumper] = 100;
+		}
+		else if (vexRT[BtnLDown] == true)
+		{
+				motor[dumper] = -100;
+		}
+		else
+		{
+				motor[dumper] = 0;
+		}
+}
+
 task main()
 {
 		setColorMode(port2, colorTypeRGB_Hue_Reflected);
@@ -76,6 +92,7 @@ task main()
 			setDriveMotorsState();
 			setConveyorBeltMotorState();
 			processColorSensor();
+			setDumperMotorState();
 
 				//writeDebugStreamLine("%d", vexRT[ChC]);
 		}
