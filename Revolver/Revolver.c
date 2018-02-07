@@ -40,15 +40,19 @@ void setConveyorBeltMotorState(bool* pIsRevolverInAutoMode)
 		if (vexRT[BtnRDown] == true && vexRT[BtnRUp] == true)
 		{
 				motor[conveyor] = 0;
+				*pIsRevolverInAutoMode = false;
 		}
 		else if (vexRT[BtnRDown] == true)
 		{
 				motor[conveyor] = 100;
+				//motor[conveyor] = 10;
 				*pIsRevolverInAutoMode = true;
 		}
 		else if (vexRT[BtnRUp] == true)
 		{
 				motor[conveyor] = -100;
+				//motor[conveyor] = 0;
+				*pIsRevolverInAutoMode = false;
 		}
 }
 
@@ -67,6 +71,7 @@ void setRevolverMotorStateInManualMode(bool* pIsRevolverInAutoMode)
 		if (increment != 0)
 		{
 				*pIsRevolverInAutoMode = false;
+				motor[conveyor] = 0;
 
 				int stepCount = ((int)(getMotorEncoder(revolver) + 20)) / 60;
 				stepCount += increment;
@@ -89,6 +94,7 @@ void setRevolverMotorStateInManualMode(bool* pIsRevolverInAutoMode)
 				if (fineAdjustmentSpeed != 0)
 				{
 						*pIsRevolverInAutoMode = false;
+						motor[conveyor] = 0;
 						motor[revolver] = fineAdjustmentSpeed;
 				}
 				else if (previousFineAdjustmentSpeed != 0)
@@ -110,21 +116,32 @@ void setRevolverMotorStateInAutoMode()
 
 		writeDebugStreamLine("%3d    %3d     %3d", redChannel, greenChannel, blueChannel);
 
-		if (blueChannel > redChannel && blueChannel > greenChannel && blueChannel > 5)
+		int minChannelValue = 6;
+		float minColorRatio = 1.2;
+		if (blueChannel > redChannel && blueChannel > greenChannel
+				&& blueChannel > minChannelValue
+				&& blueChannel / (float)(redChannel) > minColorRatio && blueChannel / (float)(greenChannel) > minColorRatio)
 		{
 				// blue
 				setMotorTarget(revolver, 120, 100);
+				writeDebugStreamLine("blue");
 
 		}
-		else if (redChannel > blueChannel && redChannel > greenChannel && redChannel > 5)
+		else if (redChannel > blueChannel && redChannel > greenChannel
+						 && redChannel > minChannelValue
+						 && redChannel / (float)(blueChannel) > minColorRatio && redChannel / (float)(greenChannel) > minColorRatio)
 		{
 				// red
 				setMotorTarget(revolver, -120, 100);
+				writeDebugStreamLine("red");
 		}
-		else if (greenChannel > 5)
+		else if (greenChannel > blueChannel && greenChannel > redChannel
+						 && greenChannel > minChannelValue
+						 && greenChannel / (float)(blueChannel) > minColorRatio && greenChannel / (float)(redChannel) > minColorRatio)
 		{
 				// green
 				setMotorTarget(revolver, 0, 100);
+				writeDebugStreamLine("green");
 		}
 }
 
