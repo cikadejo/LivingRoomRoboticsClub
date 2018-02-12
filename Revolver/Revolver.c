@@ -16,10 +16,13 @@ enum color
 
 const int minChannelValue = 20;
 const float minColorRatio = 1.15;
-const int minTimeIntervalForColorChangeDeciSec = 8;
+const int minTimeIntervalForColorChangeDeciSec = 9.7;
 const color initialRevolverColor = green;
 const int horizontalDriveKickInBoundary = 50;
 const int horizontalDrivePowerReduction = 20;
+const float forwardSpeedReductionCoefficient = 0.5;
+const int revolverLowGearSpeed = 20;
+const int revolverHighGearSpeed = 50;
 
 
 void setDriveMotorsState()
@@ -44,8 +47,8 @@ void setDriveMotorsState()
 		{
 				motor[fifthWheel] = 0;
 
-				motor[leftDrive] = vexRT[ChA];
-				motor[rightDrive] = vexRT[ChD];
+				motor[leftDrive] = vexRT[ChA] * forwardSpeedReductionCoefficient;
+				motor[rightDrive] = vexRT[ChD] * forwardSpeedReductionCoefficient;
 		}
 }
 
@@ -90,7 +93,7 @@ void setRevolverMotorStateInManualMode(bool* pIsRevolverInAutoMode)
 				int stepCount = ((int)(getMotorEncoder(revolver) + 20)) / 60;
 				stepCount += increment;
 
-				setMotorTarget(revolver,  stepCount * 60, 100);
+				setMotorTarget(revolver,  stepCount * 60, revolverHighGearSpeed);
 		}
 		else
 		{
@@ -98,11 +101,11 @@ void setRevolverMotorStateInManualMode(bool* pIsRevolverInAutoMode)
 				int fineAdjustmentSpeed = 0;
 				if (vexRT[BtnEUp] == true)
 				{
-						fineAdjustmentSpeed = 15;
+						fineAdjustmentSpeed = revolverLowGearSpeed;
 				}
 				else if (vexRT[BtnEDown] == true)
 				{
-						fineAdjustmentSpeed = -15;
+						fineAdjustmentSpeed = -revolverLowGearSpeed;
 				}
 
 				if (fineAdjustmentSpeed != 0)
