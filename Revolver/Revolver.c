@@ -22,7 +22,7 @@ const int horizontalDriveKickInBoundary = 50;
 const int horizontalDrivePowerReduction = 20;
 const float forwardSpeedReductionCoefficient = 0.5;
 const int revolverLowGearSpeed = 20;
-const int revolverHighGearSpeed = 50;
+const int revolverHighGearSpeed = 40;
 
 
 void setDriveMotorsState()
