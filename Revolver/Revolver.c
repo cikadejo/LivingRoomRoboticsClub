@@ -16,7 +16,7 @@ enum color
 
 const int minChannelValue = 20;
 const float minColorRatio = 1.15;
-const int minTimeIntervalForColorChangeDeciSec = 9.7;
+const int minTimeIntervalForColorChangeDeciSec = 9.5;
 const color initialRevolverColor = green;
 const int horizontalDriveKickInBoundary = 50;
 const int horizontalDrivePowerReduction = 20;
