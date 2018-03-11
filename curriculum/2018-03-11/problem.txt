@@ -16,3 +16,5 @@ http://help.robotc.net/WebHelpVEX/index.htm#Resources/topics/VEX_IQ/ROBOTC/Motor
 Experiment with various speeds for both motors.
 What happens when speeds of motors are of different sign (e.g. one is positive and the other one is negative)?
   
+
+Do not forget to commit and push your changes to GitHub cloud once you are done.
