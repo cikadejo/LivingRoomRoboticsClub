@@ -1,0 +1,18 @@
+Problem: write a program that drives the robot to release one side of bonus tray.
+
+
+Steps / hints:
+
+- Create a file with your program. Name it either YeOldFaithful.c, or Revolver.c (depending on your team name).
+- Save the file in the folder \LivingRoomRoboticsClub\curriculum\2018-03-11
+- Open the file in RobotC.
+- Set up your motors once you create the program file. Push "Motor and Sensor Setup" button in RobotC toolbar.
+  Hint: you will need to set up two motors, one for left drive and one for right drive
+
+Documentation on how to run motors from your code: 
+http://help.robotc.net/WebHelpVEX/index.htm#Resources/topics/VEX_IQ/ROBOTC/Motor_Commands/setMotorSpeed.htm 
+
+
+Experiment with various speeds for both motors.
+What happens when speeds of motors are of different sign (e.g. one is positive and the other one is negative)?
+  
