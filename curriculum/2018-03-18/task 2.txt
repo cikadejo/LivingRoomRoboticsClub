@@ -1,0 +1,31 @@
+Task: write a program that moves the robot to the left if the color sensor is not on the line at all, 
+      and moves the robot to the right if the color sensor is completely on the line.
+      The goal is to position the robot exactly on the rigt edge of the line.
+
+
+Steps / hints:
+
+1. Start with the program from the previous task (described in "task 1.txt").
+2. Hint: modify your if statement from previous task in the following way:
+
+	// <condition 1> below should be true if color sensor sees value less than 200
+	if (<condition 1>)
+	{
+		// Add code here to drive to the left
+	}
+	// <condition 2> below should be true if color sensor sees value greater than 250
+	else if (<condition 2>)
+	{
+		// Add code here to drive to the right
+	}
+	else
+	{
+		// Add code here to stop the fifth wheel
+	}
+
+3. Values of 200 and 250 may or may not be correct. Experiment with other values.
+   What happens if two values are too close together (e.g. 200 and 201)?
+   What happens if two values are too far apart (e.g. 200 and 400)?
+
+
+Do not forget to commit and push your changes to GitHub cloud once you are done.
