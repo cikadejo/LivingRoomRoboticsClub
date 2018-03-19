@@ -7,18 +7,16 @@ task main()
 {
 	setColorMode(port9, colorTypeGrayscale_Reflected);
 	int threshold = 200;
-	setMotorSpeed(motor1,10);
-	setMotorSpeed(motor6,-10);
+
+	setMotorSpeed(motor1,50);
+	setMotorSpeed(motor6,-50);
 
 	while(true)
 	{
-
 		if(getColorGrayscale(port9)<threshold)
 		{
-			setMotorSpeed(motor1,0);
-	    setMotorSpeed(motor6,0);
-	    setMotorSpeed(motor11,0);
-		}
+	    setMotorSpeed(motor11,-20);
+	  }
 		else
 		{
 			setMotorSpeed(motor11,20);
