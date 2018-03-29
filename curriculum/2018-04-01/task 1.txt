@@ -1,0 +1,44 @@
+Task: write a program that uses touch LED to turn green when robot is driving over a line, and to turn off when robot is not driving over a line.
+
+
+Steps / hints:
+
+1. Add a touch LED to your robot. 
+2. Add second color sensor to your robot. Purpose of this color sensor is to detect black lines that are perpendicular to direction of robot's travel.
+3. Create a file with your program. Name it either YeOldFaithful.c, or Revolver.c (depending on your team name).
+4. Save the file in the folder \LivingRoomRoboticsClub\curriculum\2018-04-01
+5. Open the file in RobotC.
+6. Make sure that the touch LED and second color sensor are added in "Motor and Sensor Setup" (button in RobotC toolbar).
+6. Inside infinite loop, read value detected by the second color sensor. If the value detected by the color sensor is less than 200 
+  (this means color sensor sees light color), drive left. Otherwise, stop the robot.
+
+  Documentation on how to read value detected by the color sensor:
+  http://help.robotc.net/WebHelpVEX/index.htm#Resources/topics/VEX_IQ/ROBOTC/Color_Sensor/getColorGrayscale.htm
+
+  Documentation on how to run motors from your code: 
+  http://help.robotc.net/WebHelpVEX/index.htm#Resources/topics/VEX_IQ/ROBOTC/Motor_Commands/setMotorSpeed.htm 
+
+  Hint: you will need an "if statement", which executes code only if certain condition is met.
+  In your case, the condition is whether color sensor returns value less than 200.
+  If statement should be executed inside the infinite loop that you have added earlier.
+
+	// <condition> below should be true if color sensor sees value less than 200
+	if (<condition>)
+	{
+		// Add code here to drive to the left
+	}
+	else
+	{
+		// Add code here to stop the fifth wheel
+	}
+
+Hint: value of 200 may or may not be correct. Experiment with other values. 
+Try 100, 300, 50, 0, 400, and see what happens.
+Which value works well?
+
+
+
+
+  
+
+Do not forget to commit and push your changes to GitHub cloud once you are done.
