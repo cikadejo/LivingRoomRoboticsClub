@@ -1,4 +1,5 @@
-Task: write a program that uses touch LED to turn green when robot is driving over a line, and to turn off when robot is not driving over a line.
+Task: write a program that uses touch LED to turn green when the robot is driving over a line, 
+and to turn it off when the robot is not driving over a line.
 
 
 Steps / hints:
@@ -8,15 +9,17 @@ Steps / hints:
 3. Create a file with your program. Name it either YeOldFaithful.c, or Revolver.c (depending on your team name).
 4. Save the file in the folder \LivingRoomRoboticsClub\curriculum\2018-04-01
 5. Open the file in RobotC.
-6. Make sure that the touch LED and second color sensor are added in "Motor and Sensor Setup" (button in RobotC toolbar).
-6. Inside infinite loop, read value detected by the second color sensor. If the value detected by the color sensor is less than 200 
-  (this means color sensor sees light color), drive left. Otherwise, stop the robot.
+6. Make sure that the touch LED and the second color sensor are added in "Motor and Sensor Setup" (button in RobotC toolbar).
+7. Important: you need to initialize *both* color sensors at the very beginning of your program.
+   Initialize them in grayscale mode, with assist light on. 
+   Documentation on how to initialize color sensor:
+   http://help.robotc.net/WebHelpVEX/index.htm#Resources/topics/VEX_IQ/ROBOTC/Color_Sensor/setColorMode.htm
 
-  Documentation on how to read value detected by the color sensor:
-  http://help.robotc.net/WebHelpVEX/index.htm#Resources/topics/VEX_IQ/ROBOTC/Color_Sensor/getColorGrayscale.htm
-
-  Documentation on how to run motors from your code: 
-  http://help.robotc.net/WebHelpVEX/index.htm#Resources/topics/VEX_IQ/ROBOTC/Motor_Commands/setMotorSpeed.htm 
+8. Inside existing infinite loop, read value detected by the second color sensor. 
+   If the value detected by the color sensor is less than 200 (this means color sensor sees dark color), set the color on touch LED to green.
+   If the value detected by the color sensor is greater than 200 (this means color sensor sees light color), set the color on touch LED to green.
+   Documentation on how to set color on touch LED:
+   http://help.robotc.net/WebHelpVEX/index.htm#Resources/topics/VEX_IQ/ROBOTC/Touch_LED/setTouchLEDColor.htm   
 
   Hint: you will need an "if statement", which executes code only if certain condition is met.
   In your case, the condition is whether color sensor returns value less than 200.
@@ -31,14 +34,5 @@ Steps / hints:
 	{
 		// Add code here to stop the fifth wheel
 	}
-
-Hint: value of 200 may or may not be correct. Experiment with other values. 
-Try 100, 300, 50, 0, 400, and see what happens.
-Which value works well?
-
-
-
-
-  
 
 Do not forget to commit and push your changes to GitHub cloud once you are done.
