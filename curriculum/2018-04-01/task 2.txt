@@ -1,0 +1,37 @@
+Task: write a program that stops the robot after it crosses three black lines that are perpendicular to direction of robot's travel.
+
+
+Steps / hints:
+
+1. Start with the file from the previous task.
+2. You will need to use a variable to remember number of lines robot crossed. 
+   A variable is a named place in computer memory that can store a value so that it can be used later.
+3. Before it can be used, a variable needs to be declared first. Declare your variable at the very beginning of your main task.
+   Here is how you can declare a variable and set it initial value to zero:
+
+   int countOfLinesCrossed = 0;
+
+4. Each time your program detects that robot crossed a line, increment your variable by 1, like this:
+
+   countOfLinesCrossed = countOfLinesCrossed + 1;
+
+5. Important: variable names are case sensitive. Following two variables are *not* the same:
+
+   countOfLinesCrossed
+   countOFLinesCrossed
+
+6. When count of lines crossed reaches 3, exit your program. To exit your infinite loop, you can use break statement.
+  
+   while(true)
+   {
+       // Your code goes here
+       // Even more code here ...
+
+       // Detect whether it is time to exit infinite loop
+       if (<condition>)
+       {
+           break;
+       }
+   }
+
+Do not forget to commit and push your changes to GitHub cloud once you are done.
