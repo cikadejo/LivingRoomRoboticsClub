@@ -1,0 +1,55 @@
+Task: write a program that drives the robot to the left until it reaches a black line.
+
+
+Steps / hints:
+
+1. Add a color sensor to your robot. Purpose of this sensor is to detect black line on the field.
+   Make sure that color sensor points towards the floor.
+2. Create a file with your program. Name it either YeOldFaithful.c, or Revolver.c (depending on your team name).
+3. Save the file in the folder \LivingRoomRoboticsClub\curriculum\2018-03-18
+4. Open the file in RobotC.
+5. Set up your motors and the color sensor once you create the program file. Push "Motor and Sensor Setup" button in RobotC toolbar.
+   Hint: you will need to set up two motors, one for left drive and one for right drive.
+6. Important: you need to initialize color sensor at the very beginning of your program.
+   Initialize it in grayscale mode, with assist light on. 
+   Documentation on how to initialize color sensor:
+   http://help.robotc.net/WebHelpVEX/index.htm#Resources/topics/VEX_IQ/ROBOTC/Color_Sensor/setColorMode.htm
+7. Add an infinite loop to your program, and make sure it is executed *after* color sensor is initialized.
+   Infinite loop looks like this:
+	while (true)
+	{
+		// Add your code here	
+	}
+9. Inside infinite loop, read value detected by the color sensor. If the value detected by the color sensor is less than 200 
+  (this means color sensor sees light color), drive left. Otherwise, stop the robot.
+
+  Documentation on how to read value detected by the color sensor:
+  http://help.robotc.net/WebHelpVEX/index.htm#Resources/topics/VEX_IQ/ROBOTC/Color_Sensor/getColorGrayscale.htm
+
+  Documentation on how to run motors from your code: 
+  http://help.robotc.net/WebHelpVEX/index.htm#Resources/topics/VEX_IQ/ROBOTC/Motor_Commands/setMotorSpeed.htm 
+
+  Hint: you will need an "if statement", which executes code only if certain condition is met.
+  In your case, the condition is whether color sensor returns value less than 200.
+  If statement should be executed inside the infinite loop that you have added earlier.
+
+	// <condition> below should be true if color sensor sees value less than 200
+	if (<condition>)
+	{
+		// Add code here to drive to the left
+	}
+	else
+	{
+		// Add code here to stop the fifth wheel
+	}
+
+Hint: value of 200 may or may not be correct. Experiment with other values. 
+Try 100, 300, 50, 0, 400, and see what happens.
+Which value works well?
+
+
+
+
+  
+
+Do not forget to commit and push your changes to GitHub cloud once you are done.

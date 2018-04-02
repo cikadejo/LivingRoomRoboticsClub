@@ -1,0 +1,12 @@
+Task: write a program that makes the robot follow the line, using one color sensor.
+
+
+Steps / hints:
+
+1. Start with the program from the previous task (described in "task 2.txt").
+2. Modify your program and add code to always drive forward.
+
+Does robot follow the line?
+What happens when it encounters horizontal black line? Why?
+
+Do not forget to commit and push your changes to GitHub cloud once you are done.
