@@ -5,6 +5,16 @@
 
 task main()
 {
+	// <condition> below should be true if color sensor sees value less than 200
+	if (<condition>)
+	{
+		// Add code here to drive forward
+	}
+	else
+	{
+		// Add code here to stop the robot
+	}
+
 	setMotorSpeed(leftdrive, 100);
 	setMotorSpeed(rightdrive, -98.65);
 
