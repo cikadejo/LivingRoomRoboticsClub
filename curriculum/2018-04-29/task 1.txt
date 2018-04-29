@@ -1,0 +1,16 @@
+Task: write a program that releases left bonus tray latch using line counting code.
+      Task is completed when robot succeeds 4 out of 5 times it tries.
+
+
+Steps / hints:
+
+1. Start with the file from the previous week.
+2. Your main task can have code *after* the infinite loop in your code.
+3. Once your robot crosses required number of black lines, you can drive it forward for a short distance using combination of functions
+   setMotorTarget() and waitUntilMotorStop()
+   Documentation:
+
+   http://help.robotc.net/WebHelpVEX/index.htm#Resources/topics/VEX_IQ/ROBOTC/Motor_Commands/setMotorTarget.htm
+   
+
+Do not forget to commit and push your changes to GitHub cloud once you are done.
