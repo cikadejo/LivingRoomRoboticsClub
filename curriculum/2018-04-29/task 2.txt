@@ -1,1 +1,16 @@
-Task:
+Task: write a program that releases bonus tray using line counting for both horizontal and vertical lines.
+
+Steps / hints:
+
+1. Start with the file from the previous task.
+2. Once left side of bonus tray is released, drive robot backwards using combination of functions
+   setMotorTarget() and waitUntilMotorStop()
+   Documentation:
+
+   http://help.robotc.net/WebHelpVEX/index.htm#Resources/topics/VEX_IQ/ROBOTC/Motor_Commands/setMotorTarget.htm
+3. Drive the robot to the right until desired number of vertical lines is crossed.
+   Hint: reuse your code for counting number of horizontal lines crossed.
+4. Drive the robot forward until bonus tray is released, using combination of functions
+   setMotorTarget() and waitUntilMotorStop()
+
+Do not forget to commit and push your changes to GitHub cloud once you are done.
