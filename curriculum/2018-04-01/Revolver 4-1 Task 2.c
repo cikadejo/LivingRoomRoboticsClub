@@ -9,33 +9,106 @@
 task main()
 {
 	setColorMode(port4, colorTypeGrayscale_Reflected);
+	setColorMode(port7, colorTypeGrayscale_Reflected);
+	sleep(2000);
 	int LinesCrossed = 0;
 	int PreviousColor= getColorGrayscale(port7);
+	int lowThreshold = 60;
+	int highThreshold = 160;
+	int PreviousColor= highThreshold + 1;
 
-
+	int greyscale = 0;
 	while (true)
-		{
-		writeDebugStreamLine("%d", getColorGrayscale(port4));
+	{
+		greyscale = getColorGrayscale(port7);
+		writeDebugStreamLine("%d", getColorGrayscale(port7));
 		setMotorSpeed(LeftDrive,40);
 		setMotorSpeed(RightDrive,40);
-			if(getColorGrayscale(port4)<80)
+
+		if(getColorGrayscale(port4)<100)
 				setMotorSpeed(FifthWheel,5);
-			else if(getColorGrayscale(port4)<200)
+		else if(getColorGrayscale(port4)<200)
 				setMotorSpeed(FifthWheel,-10);
-			if(getColorGrayscale(port7)<80)
-				setTouchLEDRGB(port3, 0, 50, 0);
-		else if(getColorGrayscale(port7)<200)
+
+
+		if(getColorGrayscale(port7)<lowThreshold)
+			setTouchLEDRGB(port3, 0, 50, 0);
+		else if(getColorGrayscale(port7)>highThreshold)
 			setTouchLEDRGB(port3, 0, 0, 0);
+		else
+			setTouchLEDRGB(port3, 50, 0, 0);
 
-	if (PreviousColor > 80 && getColorGrayscale(port7)<80)
+		if(greyscale < lowThreshold || greyscale > highThreshold)
 		{
-		LinesCrossed = LinesCrossed + 1;
-		}
-		PreviousColor = getColorGrayscale(port7);
-	if (LinesCrossed == 3)
-	{
-		break;
-	}
+			writeDebugStreamLine("color known");
+			if (PreviousColor > highThreshold && greyscale < lowThreshold)
+			{
+				writeDebugStreamLine("Line detected!");
+				LinesCrossed = LinesCrossed + 1;
 
+				playSound(soundCarAlarm2);
+				// playNote(noteA, octave3, 500);
+			}
+
+			PreviousColor = greyscale;
 		}
+		else
+			writeDebugStreamLine("color ambiguous");
+
+		if (LinesCrossed == 7)
+		{
+			break;
+		}
+	}
+	setMotorSpeed(FifthWheel,0);
+	resetMotorEncoder(LeftDrive);
+	resetMotorEncoder(RightDrive);
+	setMotorTarget(LeftDrive,-300,40);
+	setMotorTarget(RightDrive,-300,40);
+	waitUntilMotorStop(LeftDrive);
+	waitUntilMotorStop(RightDrive);
+
+	LinesCrossed = 0;
+
+	PreviousColor = 200;
+	while(true)
+	{
+		greyscale = getColorGrayscale(port4);
+		setMotorSpeed(FifthWheel,25);
+		if(getColorGrayscale(port4)<lowThreshold)
+			setTouchLEDRGB(port3, 0, 50, 0);
+		else if(getColorGrayscale(port4)>highThreshold)
+			setTouchLEDRGB(port3, 0, 0, 0);
+		else
+			setTouchLEDRGB(port3, 50, 0, 0);
+
+		if(greyscale < lowThreshold || greyscale > highThreshold)
+		{
+			writeDebugStreamLine("color known");
+			if (PreviousColor > highThreshold && greyscale < lowThreshold)
+			{
+				writeDebugStreamLine("Line detected!");
+				LinesCrossed = LinesCrossed + 1;
+
+				playSound(soundCarAlarm2);
+				// playNote(noteA, octave3, 500);
+			}
+
+			PreviousColor = greyscale;
+		}
+		if (LinesCrossed == 2)
+		{
+			break;
+		}
+	}
+	resetMotorEncoder(FifthWheel);
+	setMotorTarget(FifthWheel,-50,30);
+	waitUntilMotorStop(FifthWheel);
+
+	resetMotorEncoder(LeftDrive);
+	resetMotorEncoder(RightDrive);
+	setMotorTarget(LeftDrive,310,40);
+	setMotorTarget(RightDrive,310,40);
+	waitUntilMotorStop(LeftDrive);
+	waitUntilMotorStop(RightDrive);
 }
