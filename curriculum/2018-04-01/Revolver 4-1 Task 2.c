@@ -12,7 +12,6 @@ task main()
 	setColorMode(port7, colorTypeGrayscale_Reflected);
 	sleep(2000);
 	int LinesCrossed = 0;
-	int PreviousColor= getColorGrayscale(port7);
 	int lowThreshold = 60;
 	int highThreshold = 160;
 	int PreviousColor= highThreshold + 1;
